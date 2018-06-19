@@ -14,7 +14,7 @@ export function getPosts(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ posts });
+    res.json({posts});
   });
 }
 
@@ -35,14 +35,16 @@ export function addPost(req, res) {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
+  newPost.voteCount = 0;
 
-  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
+
+  newPost.slug = slug(newPost.title.toLowerCase(), {lowercase: true});
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ post: saved });
+    res.json({post: saved});
   });
 }
 
@@ -53,11 +55,11 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({cuid: req.params.cuid}).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ post });
+    res.json({post});
   });
 }
 
@@ -68,7 +70,7 @@ export function getPost(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({cuid: req.params.cuid}).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -76,5 +78,32 @@ export function deletePost(req, res) {
     post.remove(() => {
       res.status(200).end();
     });
+  });
+}
+
+export function editPost(req, res) {
+  Post.update({cuid: req.params.cuid}, req.body.post).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({post});
+  });
+}
+
+export function thumbUp(req, res) {
+  Post.update({cuid: req.params.cuid}, {voteCount: req.body.post.voteCount}).exec((err, voteCount) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({voteCount});
+  });
+}
+
+export function thumbDown(req, res) {
+  Post.update({cuid: req.params.cuid}, {voteCount: req.body.post.voteCount}).exec((err, voteCount) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({voteCount});
   });
 }

@@ -47,23 +47,23 @@
       ]
     },
     {
-      "name": "arrow-functional-s",
-      "description": "Generates a functional react component using arrow function in shared components",
-      "usage": "functional-s [component-name]",
+      "name": "es6-functional-s",
+      "description": "Generates a functional react component in shared components using es6 syntax",
+      "usage": "es6-functional-s [component-name]",
       "files": [
         {
-          "blueprint-path": "config/blueprints/arrow-functional-component.ejs",
+          "blueprint-path": "config/blueprints/es6-functional-component.ejs",
           "target-path": "client/components/<%= helpers.capitalize(name) %>.js"
         }
       ]
     },
     {
-      "name": "arrow-functional-m",
-      "description": "Generates a functional react component using arrow function in a module directory",
-      "usage": "functional-m <module-name>/<component-name>",
+      "name": "es6-functional-m",
+      "description": "Generates a functional react component in a module directory using es6 syntax",
+      "usage": "es6-functional-m <module-name>/<component-name>",
       "files": [
         {
-          "blueprint-path": "config/blueprints/arrow-functional-component.ejs",
+          "blueprint-path": "config/blueprints/es6-functional-component.ejs",
           "parent-path": "client/modules/<%= helpers.capitalize(parent) %>",
           "target-path": "components/<%= helpers.capitalize(name) %>/<%= helpers.capitalize(name) %>.js"
         }

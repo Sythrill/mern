@@ -46,8 +46,11 @@ import Helmet from 'react-helmet';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
+// import thumbUp from './routes/post.routes';
+// import thumbDown from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
+// import { thumbUp, thumbDown } from './controllers/post.controller';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -71,6 +74,8 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
 app.use('/api', posts);
+// app.use('/api', thumbUp);
+// app.use('/api', thumbDown);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
